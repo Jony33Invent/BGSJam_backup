@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HudManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreView;
+    [SerializeField] private TMP_Text highscoreView;
     [SerializeField] private GameObject itemHud;
     [SerializeField] private TMP_Text itemView;
     [SerializeField] private Image itemImage;
     Coroutine scaleScore;
     [SerializeField] private float animSpeed = 0.1f;
+    [SerializeField] private GameObject endScreen;
+    [SerializeField] private TMP_Text endScreenScore;
+    [SerializeField] private TMP_Text endScreenHighscore;
     IEnumerator ScaleAnim(Transform transf,float scale)
     {
         float t = 0;
@@ -33,12 +38,24 @@ public class HudManager : MonoBehaviour
         } while (t > 0f);
         transf.localScale = Vector3.Lerp(initial, final, 0);
     }
+    public void SetHighscore(int score)
+    {
+        highscoreView.text = score.ToString("0");
+    }
     public void SetScore(int score)
     {
-        scoreView.text = score.ToString("0000");
+        scoreView.text = score.ToString("0");
         if(scaleScore!=null)
         StopCoroutine(scaleScore);
         scaleScore=StartCoroutine(ScaleAnim(scoreView.transform,1.2f));
+    }
+
+    public void ActivateEndScreen()
+    {
+        Time.timeScale = 0;
+        endScreen.SetActive(true);
+        endScreenScore.text = scoreView.text;
+        endScreenHighscore.text = highscoreView.text;
     }
     public void SetItem(Sprite itemSprite,string itemName)
     {
@@ -50,6 +67,10 @@ public class HudManager : MonoBehaviour
     {
 
         itemHud.SetActive(false);
+    }
+    public void PlayScene()
+    {
+
     }
     // Update is called once per frame
     void Update()

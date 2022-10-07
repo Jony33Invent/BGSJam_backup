@@ -394,7 +394,7 @@ MonoBehaviour:
   aimLine: {fileID: 5957039223102820052}
   maxImpulse: 7
   tOffset: 0.1
-  maxParabolaPoints: 15
+  maxParabolaPoints: 30
 --- !u!1 &5957039223502183918
 GameObject:
   m_ObjectHideFlags: 0

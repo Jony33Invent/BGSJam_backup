@@ -13,7 +13,8 @@ public class ItemThrower : MonoBehaviour
     private bool aimState = false;
 
     [SerializeField] private LineRenderer aimLine;
-    
+    [SerializeField] private GameObject targetObject;
+
     private void Fire(InputAction.CallbackContext ctx)
     {
         if (aimState) // THROW ITEM
@@ -22,6 +23,7 @@ public class ItemThrower : MonoBehaviour
             player.SetCanMove(true);
             aimState = false;
             aimLine.enabled = false;
+            targetObject.SetActive(false);
             player.SetAiming(false);
         }
     }
@@ -31,6 +33,7 @@ public class ItemThrower : MonoBehaviour
         {
             aimState = true;
             aimLine.enabled = true;
+            targetObject.SetActive(true);
             player.SetCanMove(false);
             player.SetAiming(true);
         }
@@ -52,14 +55,13 @@ public class ItemThrower : MonoBehaviour
         impulse = Mathf.Min(impulse, maxImpulse);
         float angle = Vector3.Angle(player.Body.forward,( player.Body.forward + Vector3.up* impulseUp))*Mathf.Deg2Rad;
         float v0 = ((player.Body.forward + Vector3.up* impulseUp) * impulse).magnitude;
-        float maxDist = Mathf.Abs((v0 * v0 * Mathf.Sin(2*angle)) / Physics.gravity.y);
-        float height = Mathf.Abs((v0*v0* Mathf.Pow(Mathf.Sin( angle),2)) / (2*Physics.gravity.y));
+        // float maxDist = Mathf.Abs((v0 * v0 * Mathf.Sin(2*angle)) / Physics.gravity.y);
+        //float height = Mathf.Abs((v0*v0* Mathf.Pow(Mathf.Sin( angle),2)) / (2*Physics.gravity.y));
 
 
         Vector3 S0= collector.transform.position;
         Vector3 V0 = (player.Body.forward + Vector3.up * impulseUp) * impulse;
         Vector3 a = Physics.gravity;
-        Vector3 final = collector.transform.position + (player.Body.forward) * maxDist;
 
         float t = 0;
         Vector3 S;
@@ -72,12 +74,18 @@ public class ItemThrower : MonoBehaviour
             t += tOffset;
             n++;
 
-        } while (n< maxParabolaPoints);
+        } while (n< maxParabolaPoints && S.y>=0);
         aimLine.positionCount = n;
-        for(int i = 0; i < n; i++)
+        int i;
+        for ( i = 0; i < n ; i++)
         {
             aimLine.SetPosition(i, pos[i]);
         }
+
+        Vector3 final = pos[n-1];
+        final -= V0.normalized*0.5f;
+        final.y = 0.28f;
+        targetObject.transform.position = final;
         /*
         aimLine.SetPosition(1, collector.transform.position+ (((player.Body.forward)* maxDist)/2+Vector3.up*height));
         aimLine.SetPosition(2, collector.transform.position + (player.Body.forward) * maxDist);*/

@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     int currScore = 0;
     [SerializeField] private HudManager hud;
     private int scoreAcertou = 15;
+    int highestScore = 0;
     private int scoreErrou = 5;
     [SerializeField] private GameObject errouFx;
     [SerializeField] private GameObject acertouFx;
@@ -16,7 +17,18 @@ public class ScoreManager : MonoBehaviour
         spawner.SpawnItem();
         currScore += score;
         hud.SetScore(currScore);
+        if (currScore > highestScore)
+        {
+            PlayerPrefs.SetInt("Highscore", currScore);
+            highestScore = currScore;
+            hud.SetHighscore(highestScore);
+        }
 
+    }
+    public void ResetScore()
+    {
+        currScore = 0;
+        hud.SetScore(currScore);
     }
     public void AcertouScore(Vector3 pos)
     {
@@ -31,6 +43,9 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerPrefs.SetInt("Highscore", 0);
+        highestScore = PlayerPrefs.GetInt("Highscore");
+        hud.SetHighscore(highestScore);
         hud.SetScore(currScore);
     }
 
