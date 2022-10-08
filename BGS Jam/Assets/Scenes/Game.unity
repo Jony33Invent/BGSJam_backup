@@ -8288,6 +8288,8 @@ MonoBehaviour:
   initialSpawn: 5
   itens:
   - {fileID: 6096451721293562434, guid: 7dc663a2b6cc9e24a8ca26debe136ebf, type: 3}
+  - {fileID: 3498844004675953436, guid: 7ee4375e38f247c4aa5a26a4f46b0aa6, type: 3}
+  - {fileID: 5557435043234981299, guid: 58edd38efcfb8464fb61123756eeaec4, type: 3}
   posParent: {fileID: 1342498207}
 --- !u!4 &1001694376 stripped
 Transform:
