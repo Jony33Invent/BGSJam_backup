@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject errouFx;
     [SerializeField] private GameObject acertouFx;
     [SerializeField] private ItemSpawner spawner;
+    [SerializeField] private Timer timer;
     public void AddScore(int score)
     {
         spawner.SpawnItem();
@@ -32,6 +33,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void AcertouScore(Vector3 pos)
     {
+        timer.AddTime();
         AddScore(scoreAcertou);
         Instantiate(acertouFx, pos, Quaternion.identity);
     }

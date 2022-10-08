@@ -10,12 +10,13 @@ public class Timer : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private HudManager hudManager;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float addTime;
 
+    public void AddTime()
+    {
+        timerCount -= addTime;
+        timerCount = Mathf.Max(timerCount, 0);
+    }
     // Update is called once per frame
     void Update()
     {
