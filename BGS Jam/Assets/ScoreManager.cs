@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PlayerPrefs.SetInt("Highscore", 0);
+        PlayerPrefs.SetInt("Highscore", 0);
         highestScore = PlayerPrefs.GetInt("Highscore");
         hud.SetHighscore(highestScore);
         hud.SetScore(currScore);

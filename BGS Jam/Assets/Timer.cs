@@ -23,8 +23,8 @@ public class Timer : MonoBehaviour
         slider.value = timerCount/endTime;
         if (timerCount >= endTime)
         {
-            scoreManager.ResetScore();
-            hudManager.ActivateEndScreen();
+            hudManager.ActivateEndScreen(); 
+            //scoreManager.ResetScore();
             timerCount = 0;
             //Destroy(gameObject);
         }

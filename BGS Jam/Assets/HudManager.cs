@@ -17,6 +17,7 @@ public class HudManager : MonoBehaviour
     [SerializeField] private GameObject endScreen;
     [SerializeField] private TMP_Text endScreenScore;
     [SerializeField] private TMP_Text endScreenHighscore;
+    [SerializeField] private GameObject gameHud;
     IEnumerator ScaleAnim(Transform transf,float scale)
     {
         float t = 0;
@@ -52,10 +53,11 @@ public class HudManager : MonoBehaviour
 
     public void ActivateEndScreen()
     {
-        Time.timeScale = 0;
+        gameHud.GetComponent<Animator>().Play("HudOut");
         endScreen.SetActive(true);
         endScreenScore.text = scoreView.text;
         endScreenHighscore.text = highscoreView.text;
+        Time.timeScale = 0;
     }
     public void SetItem(Sprite itemSprite,string itemName)
     {
@@ -68,9 +70,15 @@ public class HudManager : MonoBehaviour
 
         itemHud.SetActive(false);
     }
-    public void PlayScene()
+    public void PlayScene(string scene)
     {
-
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(scene);
+    }
+    public void ReloadScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     // Update is called once per frame
     void Update()

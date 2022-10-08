@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6741612214506248105, guid: 4b239299299639441bc761884fbcef71, type: 3}
       propertyPath: m_Name
-      value: Item0 Variant
+      value: Bola de Papel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b239299299639441bc761884fbcef71, type: 3}

@@ -177,6 +177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectorCollider: {fileID: 5957039223157209163}
   hudManager: {fileID: 0}
+  trashCams:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   colDelayTime: 1
 --- !u!135 &5957039223157209163
 SphereCollider:
@@ -392,6 +397,7 @@ MonoBehaviour:
   impulse: 5
   impulseUp: 1
   aimLine: {fileID: 5957039223102820052}
+  targetObject: {fileID: 0}
   maxImpulse: 7
   tOffset: 0.1
   maxParabolaPoints: 30
