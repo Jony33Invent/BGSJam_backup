@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject acertouFx;
     [SerializeField] private ItemSpawner spawner;
     [SerializeField] private Timer timer;
+    [SerializeField] private SoundManager soundManager;
     public void AddScore(int score)
     {
         spawner.SpawnItem();
@@ -33,19 +34,21 @@ public class ScoreManager : MonoBehaviour
     }
     public void AcertouScore(Vector3 pos)
     {
+        soundManager.Play("Acertou");
         timer.AddTime();
         AddScore(scoreAcertou);
         Instantiate(acertouFx, pos, Quaternion.identity);
     }
     public void ErrouScore(Vector3 pos)
     {
+        soundManager.Play("Errou");
         AddScore(scoreErrou);
         Instantiate(errouFx, pos, Quaternion.identity);
     }
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("Highscore", 0);
+        //PlayerPrefs.SetInt("Highscore", 0);
         highestScore = PlayerPrefs.GetInt("Highscore");
         hud.SetHighscore(highestScore);
         hud.SetScore(currScore);

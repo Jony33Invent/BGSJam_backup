@@ -45,6 +45,8 @@ public class ItemThrower : MonoBehaviour
 
         player.controls.Player.Fire.started += StartAim;
         player.controls.Player.Fire.canceled += Fire;
+        targetObject.SetActive(false);
+        aimLine.enabled = false;
     }
     [SerializeField] private float maxImpulse;
     [SerializeField] private float tOffset=0.2f;

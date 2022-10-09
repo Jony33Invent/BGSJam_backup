@@ -18,6 +18,10 @@ public class ItemCollector : MonoBehaviour
     [SerializeField] private float colDelayTime = 0.5f;
     [SerializeField] private GameObject collectFx;
     [SerializeField] private Transform playerTransf;
+
+    [SerializeField] private List<Transform> arrowPos;
+    [SerializeField] private GameObject arrowObj;
+    [SerializeField] private SoundManager soundManager;
     IEnumerator DesactivateCollider(Collider col)
     {
         col.enabled = false;
@@ -26,7 +30,7 @@ public class ItemCollector : MonoBehaviour
     }
     public void GetItem(GameObject obj)
     {
-
+        soundManager.Play("Pegou");
         itemCollected = obj;
         itemCollected.transform.SetParent(transform);
         Instantiate(collectFx, itemCollected.transform.position, Quaternion.identity);
@@ -42,6 +46,13 @@ public class ItemCollector : MonoBehaviour
         // mostra item na hud
         hudManager.SetItemColor(item.ItemId);
         hudManager.SetItem(item.ItemSprite, item.ItemName);
+
+
+        // seta em cima do lixo
+        arrowObj.SetActive(true);
+        arrowObj.transform.position = arrowPos[item.ItemId].position;
+
+        
         hasItem = true;
     }
     public void ThrowItem(Vector3 direction)
@@ -57,6 +68,9 @@ public class ItemCollector : MonoBehaviour
         itemCollected.transform.parent = null;
         itemRigidbody.AddForce(direction, ForceMode.Impulse);
         item.ActivateFx();
+
+
+        arrowObj.SetActive(false);
         hasItem = false;
     }
     private void OnTriggerEnter(Collider other)

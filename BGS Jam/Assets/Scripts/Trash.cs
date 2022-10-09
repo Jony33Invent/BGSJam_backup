@@ -8,7 +8,9 @@ public class Trash : MonoBehaviour
     private ScoreManager scoreManager;
     private void Start()
     {
-        scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        GameObject obj = GameObject.FindGameObjectWithTag("ScoreManager");
+        if(obj!=null)
+        scoreManager = obj.GetComponent<ScoreManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
