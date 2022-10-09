@@ -8,7 +8,7 @@ public class CircleRenderer : MonoBehaviour
     [SerializeField] private int circleSteps;
     [SerializeField] private float circleRadius;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DrawCircle(circleSteps, circleRadius);
     }
