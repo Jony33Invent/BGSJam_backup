@@ -16,6 +16,8 @@ public class ItemCollector : MonoBehaviour
     [SerializeField] private List<GameObject> trashCams;
     public bool HasItem => hasItem;
     [SerializeField] private float colDelayTime = 0.5f;
+    [SerializeField] private GameObject collectFx;
+    [SerializeField] private Transform playerTransf;
     IEnumerator DesactivateCollider(Collider col)
     {
         col.enabled = false;
@@ -27,6 +29,7 @@ public class ItemCollector : MonoBehaviour
 
         itemCollected = obj;
         itemCollected.transform.SetParent(transform);
+        Instantiate(collectFx, itemCollected.transform.position, Quaternion.identity);
         itemCollected.transform.localPosition = Vector3.zero;
         itemRigidbody = itemCollected.GetComponent<Rigidbody>();
         itemRigidbody.isKinematic= true;
@@ -37,6 +40,7 @@ public class ItemCollector : MonoBehaviour
         activeCam.SetActive(false);
         activeCam = trashCams[item.ItemId];
         // mostra item na hud
+        hudManager.SetItemColor(item.ItemId);
         hudManager.SetItem(item.ItemSprite, item.ItemName);
         hasItem = true;
     }

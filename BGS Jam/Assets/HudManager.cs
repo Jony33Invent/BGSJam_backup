@@ -18,6 +18,12 @@ public class HudManager : MonoBehaviour
     [SerializeField] private TMP_Text endScreenScore;
     [SerializeField] private TMP_Text endScreenHighscore;
     [SerializeField] private GameObject gameHud;
+
+
+    [SerializeField] private Image itemBgImage;
+    [SerializeField] private TMP_Text itemTxt;
+    [SerializeField] private List<Color> trashColors;
+
     IEnumerator ScaleAnim(Transform transf,float scale)
     {
         float t = 0;
@@ -80,9 +86,9 @@ public class HudManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    // Update is called once per frame
-    void Update()
+    public void SetItemColor(int id)
     {
-        
+        itemBgImage.color = trashColors[id];
+        //itemTxt.color = trashColors[id];
     }
 }

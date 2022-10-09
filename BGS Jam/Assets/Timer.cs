@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         timerCount += Time.deltaTime;
-        slider.value = timerCount/endTime;
+        slider.value = 1f-timerCount/endTime;
         if (timerCount >= endTime)
         {
             hudManager.ActivateEndScreen(); 
